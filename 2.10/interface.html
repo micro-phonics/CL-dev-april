@@ -1,0 +1,185 @@
+<!-- place HTML elements for exercise interface here -->
+<<<<<<< HEAD
+
+<div class="container">
+
+
+        <h1 class="title" onClick="sayit('Click play to hear a word then select the letters to spell the word you hear')">Select the letters (?)</h1>
+
+
+        <audio id="myAudio">
+          <source src="../media/sat.mp3" type="audio/mpeg">
+            <p>Your browser does not support the audio element. </p>
+             
+        </audio>
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+		
+		fadeIn();
+      // 
+var buttons = document.querySelectorAll('.options'),
+    i;
+
+for(i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function() {
+        var pressed = document.getElementById('pressed');
+        pressed.value += this.value+" ";
+		pressed2.value += this.value+" ";
+		
+		//document.getElementById('pressed').value = 'sun';
+        if(pressed.value === pressed.dataset.valid) {
+			document.getElementById('pressed').value = quiz;
+			window.speechSynthesis.cancel
+			var msg = new SpeechSynthesisUtterance("That is correct , the word is "+ quiz);     msg.lang = "en-GB";    window.speechSynthesis.speak(msg); 
+            retryCorrect()// do this as image display like my apps
+			//alert('That is correct');
+			//wait(4000); // wait 10ms
+			//pressed.value = "";
+        }
+        if(pressed.value.split(' ').length > pressed.dataset.buttons) {
+			 retryIncorrect();
+            //Start over
+           //wait(2000);
+		    pressed.value = "";
+			pressed2.value = "";
+			
+        }
+    }, false);
+}
+
+    }
+	
+	function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
+  //]]></script>
+
+ 
+ 
+<button style="display:none" class="btn-third btn-incorrect" onclick="retryIncorrect()">
+                        <img src="../img/retry.png" alt="" class="incorrect-retry" style="display:none">
+  </button>
+                    <span class="separate" id="instance-2"></span>
+                    <button style="display:none" class="btn-third btn-incorrect" onclick="nextUrl()">
+                        <img src="../img/help.png" alt="" class="incorrect-next" >
+                    </button>
+                      <!-- button id="audio-play" class="btn-main" onclick="playAudio()" -->
+        <button id="audio-play" class="btn-main" onclick="sayit(quiz)">Play</button>
+        
+<input align="middle" id="pressed"  type="text" data-valid="s a t " data-buttons="3" style="display:none;">
+<input align="middle" id="pressed2" type="text" data-valid="s a t " data-buttons="3" style="text-align: center;
+    color: white;
+    font-size: 92px;
+    background-color: #333;
+    height: 120px;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 4px white;
+    border: none;
+    border-width: 0px;
+    left: auto;
+    right: auto;
+    display: block;
+    margin: auto;">
+   
+<div class="options-container">
+            <button  value="s" id="option1" class="options btn btn-primary btn-lg">s</button>
+            <button  value="a" id="option2" class="options btn btn-primary btn-lg">a</button>
+            <button  value="p" id="option3" class="options btn btn-primary btn-lg">p</button>
+            <button  value="t" id="option4" class="options btn btn-primary btn-lg">t</button>
+            <button  value="i" id="option5" class="options btn btn-primary btn-lg">i</button>
+            <button  value="n" id="option6" class="options btn btn-primary btn-lg">n</button>
+  </div>
+ <button id="retry" class="btn-main" onclick="retry()">
+<p class="incorrect-retry" value="Refresh Page" onClick="window.location.reload();">Retry</p>
+  </button>
+        <div id="response-container"></div>
+
+
+  <script src="main.js"></script>
+  <script src="selection.js"></script>
+
+</div>
+
+<!-- place HTML elements for exercise interface here -->
+
+<div class="footer" style="display: none;">
+    <audio src="../../../audio/correct.mp3" controls id="correctAudio"></audio>
+    <audio src="../../../audio/incorrect.mp3" controls id="incorrectAudio"></audio>
+=======
+<p id="demo"></p><div>
+<div > <!-- span style="display : inline-block"> PenSize <span id="lineWidth">3</span>
+        <input type="range" id="penSize" min="1" max="30" value="3" -->
+       <button class="d-inline p-2 bg-dark text-white" onclick="sayit(quiz)">Play word</button>
+        <button  class="d-inline p-2 bg-dark text-white" onclick="canvas.erase();">Clear</button>
+        <button  class="d-inline p-2 bg-dark text-white" onclick="canvas.setOptions({numOfReturn : 2}); canvas.recognize();">Check my writing</button>
+        <!--button onclick="canvas.undo()">Undo</button -->
+        <!-- button onclick="canvas.redo()">Redo</button -->
+       <p>
+        <canvas id="canvas" width="400" height="400" style="border: 2px solid; cursor: crosshair;"></canvas>
+       </p>
+        <!-- form>
+          Language:
+          <select id="language" >
+            <option value="zh_TW">Chinese</option>
+           <option value="ja">Japanese</option>
+            <option  selected="selected" value="en">English</option>
+          </select>
+        </form>-->
+       
+        <span id="result" style="display:none"></span> </span> 
+        
+      </div>
+      
+     <script type="text/javascript" src="handwriting.canvas.js"></script> 
+        <script type="text/javascript" defer>
+    var canvas = new handwriting.Canvas(document.getElementById('canvas'), 3);
+	canvas.setOptions({numOfReturn : 2});
+	console.log(canvas.options); 
+       canvas.setLineWidth(10);
+	   console.log('line width is '+canvas.lineWidth);
+	   canvas.setOptions({language:"en"});
+	console.log(canvas.options); 
+       
+    var width = document.getElementById("demo").clientWidth
+    canvas.cxt.canvas.width  = width < 400 ? width : 400;
+    canvas.cxt.canvas.height = width < 400 ? width : 400;
+    canvas.setCallBack(function(data, err) {
+      if (err) throw err;
+      else document.getElementById("result").innerHTML = data;
+	  //data = data.toLowerCase();
+	  alert(data);	
+	    var word = GetUrlValue('quiz');
+		console.log('word is ' + word);
+	  //var word = "sat";
+	 	 if (data.includes(word)) {
+		 var msg = new SpeechSynthesisUtterance("Excellent; your handwriting is correct. Well done.");     msg.lang = "en-GB";    window.speechSynthesis.speak(msg);
+		  }
+	  else { 
+	   var msg = new SpeechSynthesisUtterance("Please try that again; you're nearly there.");     msg.lang = "en-GB";    window.speechSynthesis.speak(msg); }
+    });
+    canvas.set_Undo_Redo(true, true);
+	<!-- commented out the below cos we arent using pensize options..-->
+   <!--  var penSize = document.getElementById("penSize"); -->
+     <!-- penSize.addEventListener("mousemove", function(){ -->
+		 <!-- document.getElementById("lineWidth").innerHTML = penSize.value;   -->  
+		 <!-- }); -->
+     <!-- penSize.addEventListener("change", function(){ -->
+		 <!-- canvas.setLineWidth(penSize.value); -->
+		 <!-- }); -->
+		function changeImage(a) {document.getElementById("scoreimg").src=a;}
+	
+  </script>
+<!-- place HTML elements for exercise interface here -->
+<script type="text/javascript" src="script.js"></script>
+<div class="footer" style="display: none;">
+    <audio src="/wip/citizenliteracy/audio/correct.mp3" controls id="correctAudio"></audio>
+    <audio src="/wip/citizenliteracy/audio/incorrect.mp3" controls id="incorrectAudio"></audio>
+>>>>>>> 5f0b1487757b613584ebca74d61cbd858e8e0711
+</div>

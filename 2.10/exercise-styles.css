@@ -1,0 +1,16 @@
+<<<<<<< HEAD
+/* place styles unique to 2.10 here */
+=======
+/* place styles unique to 2.1 here */
+>>>>>>> 5f0b1487757b613584ebca74d61cbd858e8e0711
+
+.grapheme {
+    width: 40%;
+    font-size: .9em;
+    min-height: 50px;
+    font-size: 1.2em;
+}
+
+.grapheme img {
+    width: 100%;
+}
